@@ -2,12 +2,11 @@ import PropTypes from "prop-types";
 
 import { useRef, useState } from "react";
 import useStock from "../hooks/useStock";
+import StockItem, { CATEGORIES } from "../entities/StockItem";
 
 ItemForm.propTypes = {
   itemToUpdate: PropTypes.object,
 };
-
-const CATEGORIES = ["Jogos", "Livros", "Brinquedos", "Acessórios"];
 
 export default function ItemForm({ itemToUpdate }) {
   const defaultItem = {
@@ -20,13 +19,30 @@ export default function ItemForm({ itemToUpdate }) {
 
   const [item, setItem] = useState(itemToUpdate ? itemToUpdate : defaultItem);
   const inputRef = useRef(null);
+  const { addItem } = useStock();
 
   const handleChange = (ev) => {
     setItem((current) => ({ ...current, [ev.target.name]: ev.target.value }));
   };
 
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+
+    try {
+      console.log(item);
+      const validItem = new StockItem(item);
+      console.log(validItem);
+      addItem(validItem);
+      alert("Item cadastrado com sucesso");
+      setItem(defaultItem);
+      inputRef.current.focus();
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="row">
         <div>
           <label htmlFor="name">Nome</label>
