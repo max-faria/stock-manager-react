@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { Children, createContext, useState } from "react";
 import PropTypes from "prop-types";
 
 export const StockContext = createContext({});
@@ -8,7 +8,7 @@ StockContextProvider.propTypes = {
 };
 
 //nome, description, quantity, createdAt
-export function StockContextProvider() {
+export function StockContextProvider({ children }) {
   const [items, setItems] = useState(() => {
     const storedItems = localStorage.getItem("obc-react-stock");
     if (!storedItems) return [];
