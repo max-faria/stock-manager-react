@@ -29,9 +29,36 @@ export function StockContextProvider({ children }) {
     });
   };
 
+  const getItem = (itemId) => {
+    return items.find((item) => item.id === +itemId);
+  };
+
+  const deleteItem = (itemId) => {
+    setItems((currentState) => {
+      const updatedItems = currentState.filter((item) => item.id !== itemId);
+      localStorage.setItem("obc-react-stock", JSON.stringify(updatedItems));
+      return updatedItems;
+    });
+  };
+
+  const updateItem = (itemId, newAttributes) => {
+    setItems((currentState) => {
+      const itemIndex = currentState.findIndex((item) => item.id === +itemId);
+      const updateditems = [...currentState];
+      Object.assign(updateditems[itemIndex], newAttributes, {
+        uptadedAt: new Date(),
+      });
+      localStorage.setItem("obc-react-stock", JSON.stringify(updateditems));
+      return updateditems;
+    });
+  };
+
   const stock = {
     items, //estado atual dos items
     addItem,
+    deleteItem,
+    getItem,
+    updateItem,
   };
 
   return (

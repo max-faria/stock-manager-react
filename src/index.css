@@ -181,6 +181,7 @@ select {
 }
 
 .item span,
+.row span,
 .dashboard-card {
   background-color: #1c1a1d;
   box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.25);
