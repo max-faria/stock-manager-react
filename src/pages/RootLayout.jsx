@@ -5,7 +5,7 @@ export default function RootLayout() {
     <>
       <header>
         <Link to="/" className="logo">
-          REACT STOCK
+          STOCK
         </Link>
         <nav>
           <Link to="/">Início</Link>
@@ -15,7 +15,7 @@ export default function RootLayout() {
       <div>
         <Outlet />
       </div>
-      <footer>Feito com o React Router DOM</footer>
+{/*       <footer>Feito com o React Router DOM</footer> */}
     </>
   );
 }
